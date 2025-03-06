@@ -3,3 +3,6 @@
 
 # Ignore external dependencies (Crow, ASIO)
 movie-backend/external/
+
+# ignore api keys
+.env

@@ -7,8 +7,14 @@ find_package(Threads REQUIRED)
 
 add_executable(movie-backend src/main.cpp)
 
-# Include Crow and ASIO
+# Include Crow, ASIO, and CPR
 target_include_directories(movie-backend PRIVATE ${CMAKE_SOURCE_DIR}/external/crow/include)
 target_include_directories(movie-backend PRIVATE ${CMAKE_SOURCE_DIR}/external/asio/asio/include)
+target_include_directories(movie-backend PRIVATE ${CMAKE_SOURCE_DIR}/external/cpr/include)
+target_include_directories(movie-backend PRIVATE ${CMAKE_SOURCE_DIR}/external/nlohmann)
 
-target_link_libraries(movie-backend PRIVATE pthread)
+# Add CPR as a subdirectory
+add_subdirectory(${CMAKE_SOURCE_DIR}/external/cpr)
+
+# Link libraries
+target_link_libraries(movie-backend PRIVATE cpr::cpr pthread)
