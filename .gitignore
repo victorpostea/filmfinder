@@ -1,2 +1,5 @@
-# vscode settings
-.vscode
+# Ignore VS Code settings
+.vscode/
+
+# Ignore external dependencies (Crow, ASIO)
+movie-backend/external/
