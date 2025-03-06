@@ -1,4 +1,4 @@
-# 🎬 FilmFinder - A Containerized Movie Database App
+# 🎬 FilmFinder - Movie Database App
 
 FilmFinder is a **Dockerized** movie database app that consists of:
 - **movie-backend** → A C++ backend using Crow and MySQL
