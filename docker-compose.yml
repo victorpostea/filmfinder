@@ -1,0 +1,39 @@
+version: '3'
+services:
+  movie-frontend:
+    build: ./movie-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - movie-backend
+
+  movie-backend:
+    build: ./movie-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - movie-db
+    environment:
+      DATABASE_URL: mysql://root:mypassword@movie-db:3306/MovieDB
+
+  movie-db:
+    image: mysql:latest
+    container_name: movie-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: MovieDB
+    ports:
+      - "3306:3306"
+    volumes:
+      - movie-db-data:/var/lib/mysql
+      - ./movie-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  populate-db:
+    build: ./movie-db
+    depends_on:
+      - movie-db
+    command: ["python3", "populate_db.py"]
+
+volumes:
+  movie-db-data:
