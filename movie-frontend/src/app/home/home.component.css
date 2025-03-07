@@ -1,0 +1,12 @@
+h1 {
+    font-size: 60px;
+}
+
+.backGroundGrey {
+    height: 100%;
+    background-color: rgb(245, 245, 245);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    min-height: 100%;
+}
