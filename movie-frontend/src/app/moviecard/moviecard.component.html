@@ -1,1 +1,11 @@
-<p>moviecard works!</p>
+<div class="movie-card">
+  <img *ngIf="movie.poster_path" 
+       [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
+       [alt]="movie.title + ' Poster'">
+
+  <div class="movie-details">
+    <h3>{{ movie.title }}</h3>
+    <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+    <p><strong>Rating:</strong> ⭐ {{ movie.vote_average }}/10</p>
+  </div>
+</div>

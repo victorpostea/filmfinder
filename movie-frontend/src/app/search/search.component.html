@@ -1,1 +1,12 @@
-<p>search works!</p>
+<div>
+  <input type="text" [(ngModel)]="userInput" placeholder="Search for a movie" />
+  <button (click)="submitInput()">Submit</button>
+</div>
+
+<div *ngIf="movie_list | async as movies">
+  <ul class="movie-list">
+      <li *ngFor="let movie of movies.results">
+          <app-moviecard [movie]="movie"></app-moviecard>
+      </li>
+  </ul>
+</div>

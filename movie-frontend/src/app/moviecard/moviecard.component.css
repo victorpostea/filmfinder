@@ -1,0 +1,34 @@
+.movie-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card img {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.movie-details {
+  flex: 1;
+}
+
+.movie-details h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.movie-details p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+}
+
+li {
+    
+}
