@@ -1,11 +1,12 @@
 <div class="movie-card">
-  <img *ngIf="movie.poster_path" 
-       [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
-       [alt]="movie.title + ' Poster'">
+  <img [src]="movie.poster_path" [alt]="movie.title + ' Poster'">
 
   <div class="movie-details">
     <h3>{{ movie.title }}</h3>
     <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
     <p><strong>Rating:</strong> ⭐ {{ movie.vote_average }}/10</p>
+    <p class="movie-overview">
+      <strong>Overview:</strong> {{ movie.overview | slice:0:150 }}...
+    </p>
   </div>
 </div>
