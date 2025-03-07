@@ -28,7 +28,19 @@ cd filmfinder
 
 ---
 
-### **2️⃣ Build and Run All Containers**
+### **2️⃣ Add .env file to root repository under filmfinder/**
+
+Create a .env file under filmfinder/ and add
+```sh
+TMDB_BEARER_TOKEN=""
+```
+
+You can sign up and get bearer token here:
+> https://developer.themoviedb.org/reference/intro/authentication
+
+---
+
+### **3️⃣ Build and Run All Containers**
 Run the following command in the **filmfinder/** directory:
 ```sh
 docker-compose up -d --build
