@@ -10,18 +10,20 @@ import { Movie, MovieResponse } from '../models/movie.model';
 })
 export class SearchComponent {
   userInput: string = '';
+  queryParam: string = '';
   movie_list: Observable<MovieResponse> | null = null;
 
   constructor(private movieservice: MovieService){}
 
   submitInput() {
     console.log("user input submitted: ", this.userInput);
+    this.queryParam = this.userInput.replace(/ /g, "&20")
     this.findFilms();
   }
 
   findFilms() {
     if (this.userInput) {
-      this.movie_list = this.movieservice.searchMovie(this.userInput);
+      this.movie_list = this.movieservice.searchMovie(this.queryParam);
     }
   }
 }
