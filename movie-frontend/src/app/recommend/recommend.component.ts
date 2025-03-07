@@ -43,7 +43,7 @@ export class RecommendComponent implements OnInit {
     // Sort genres by weight (highest first)
     const sortedGenres = Object.entries(this.genreWeights).sort((a, b) => b[1] - a[1]);
     // Use the top 3 genre IDs for the recommendation
-    const topGenreIds = sortedGenres.slice(0, 3).map(([id]) => id).join(',');
+    const topGenreIds = sortedGenres.slice(0, 2).map(([id]) => id).join(',');
     
     this.movieService.getRecommendedMovies(topGenreIds).subscribe((response: MovieResponse) => {
       if (response.results && response.results.length > 0) {
