@@ -1,0 +1,6 @@
+[submodule "movie-backend/external/crow"]
+	path = movie-backend/external/crow
+	url = https://github.com/CrowCpp/Crow.git
+[submodule "movie-backend/external/cpr"]
+	path = movie-backend/external/cpr
+	url = https://github.com/whoshuu/cpr.git
