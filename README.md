@@ -46,9 +46,6 @@ Run the following command in the **filmfinder/** directory:
 docker-compose up -d --build
 ```
 - This will:
-  - **Build and start** `movie-db` (MySQL database).
-  - **Initialize the database** with `init.sql`.
-  - **Run `populate_db.py`** to insert sample movie data.
   - **Start `movie-backend`** (C++ Crow server).
   - **Launch `movie-frontend`** (Angular web app).
 
@@ -61,7 +58,6 @@ After starting the containers, you can access:
 |------------------|------------------------------|
 | **Frontend (Angular)**  | [http://localhost:4200](http://localhost:4200) |
 | **Backend (Crow API)**  | [http://localhost:8080](http://localhost:8080) |
-| **Database (MySQL)**  | Host: `localhost`, Port: `3306` |
 
 ---
 
