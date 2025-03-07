@@ -1,1 +1,21 @@
-<p>recommend works!</p>
+<div class="recommendation-container">
+  <div *ngIf="currentMovie" class="movie-card" [ngClass]="animationClass">
+    <img [src]="currentMovie.poster_path" [alt]="currentMovie.title + ' Poster'">
+    <div class="movie-details">
+      <h3>{{ currentMovie.title }}</h3>
+      <p><strong>Release Date:</strong> {{ currentMovie.release_date }}</p>
+      <p><strong>Rating:</strong> ⭐ {{ currentMovie.vote_average }}/10</p>
+      <p class="movie-overview">
+        <strong>Overview:</strong> {{ currentMovie.overview | slice:0:150 }}...
+      </p>
+    </div>
+  </div>
+  <div *ngIf="!currentMovie">
+    <p>No recommendations available at this time.</p>
+  </div>
+
+  <div class="controls">
+    <button class="dislike-btn" (click)="onClickLeft()">Dislike</button>
+    <button class="like-btn" (click)="onClickRight()">Like</button>
+  </div>
+</div>

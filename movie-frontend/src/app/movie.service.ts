@@ -9,11 +9,16 @@ import { Observable } from 'rxjs';
 export class MovieService {
   private url = 'http://localhost:8080';
   private searchExtension = '/movies?query='
+  private recommendExtension = '/discover?genres='
 
   constructor(private http: HttpClient) {}
 
   searchMovie(query: String): Observable<MovieResponse> {
     return this.http.get<MovieResponse>(`${this.url}${this.searchExtension}${query}`)
+  }
+
+  getRecommendedMovies(genreIds: string): Observable<MovieResponse> {
+    return this.http.get<MovieResponse>(`${this.url}${this.recommendExtension}${genreIds}`);
   }
 
 }

@@ -1,0 +1,55 @@
+.recommendation-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.movie-card {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-right {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* Styling for controls */
+.controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.controls button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dislike-btn {
+  background-color: #ff4c4c;
+  border: none;
+  color: #fff;
+}
+
+.like-btn {
+  background-color: #4caf50;
+  border: none;
+  color: #fff;
+}
+
+.movie-card img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+}
