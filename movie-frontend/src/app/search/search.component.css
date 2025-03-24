@@ -1,12 +1,13 @@
 .search-container {
-    max-width: 800px;
+  padding: 20px;
+    max-width: 900px;
     margin: 0 auto;
   }
 
   .search-wrapper {
     background: white;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 20px #00000014;
     transition: all 0.3s ease;
   }
 
@@ -50,4 +51,8 @@
   .searchButton{
     width: 100%;
     padding-bottom: 30px;
+  }
+
+  #flex {
+    display: flex;
   }
