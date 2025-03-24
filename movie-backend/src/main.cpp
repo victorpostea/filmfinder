@@ -43,9 +43,17 @@ int main() {
                 return res;
             }
             std::string bearer_token_str = bearer_token;
-            std::string tmdb_url = "https://api.themoviedb.org/3/search/movie?query=" + title;
+            
+            // Use CPR's Parameters to properly encode the query
+            auto parameters = cpr::Parameters{{"query", title}};
             cpr::Header headers{{"Authorization", "Bearer " + bearer_token_str}, {"Accept", "application/json"}};
-            cpr::Response r = cpr::Get(cpr::Url{tmdb_url}, headers);
+            
+            cpr::Response r = cpr::Get(
+                cpr::Url{"https://api.themoviedb.org/3/search/movie"},
+                parameters,
+                headers
+            );
+            
             if (r.status_code != 200) {
                 crow::response res(500, "Failed to fetch data from TMDB API");
                 res.add_header("Access-Control-Allow-Origin", "*");
