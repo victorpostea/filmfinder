@@ -3,7 +3,6 @@
 FilmFinder is a **Dockerized** movie database app that consists of:
 - **movie-backend** → A C++ backend using Crow and MySQL
 - **movie-frontend** → An Angular frontend
-- **movie-db** → A MySQL database with preloaded movie data
 
 ---
 
