@@ -1,21 +1,53 @@
-<div class="recommendation-container">
-  <div *ngIf="currentMovie" class="movie-card" [ngClass]="animationClass">
-    <img [src]="currentMovie.poster_path" [alt]="currentMovie.title + ' Poster'">
-    <div class="movie-details">
-      <h3>{{ currentMovie.title }}</h3>
-      <p><strong>Release Date:</strong> {{ currentMovie.release_date }}</p>
-      <p><strong>Rating:</strong> ⭐ {{ currentMovie.vote_average }}/10</p>
-      <p class="movie-overview">
-        <strong>Overview:</strong> {{ currentMovie.overview | slice:0:150 }}...
-      </p>
+<div class="recommend-container">
+  <div class="header">
+    <h1>Discover Movies</h1>
+    <p class="subtitle">Swipe right to like, left to skip</p>
+  </div>
+
+  <div class="card-container" *ngIf="currentMovie">
+    <div class="movie-card" [ngClass]="animationClass">
+      <div class="poster-container">
+        <img [src]="currentMovie.poster_path" [alt]="currentMovie.title + ' Poster'" class="movie-poster">
+        <div class="overlay">
+          <div class="movie-info">
+            <h2 class="movie-title">{{ currentMovie.title }}</h2>
+            <div class="movie-meta">
+              <span class="rating">
+                <i class="fas fa-star"></i>
+                {{ currentMovie.vote_average | number:'1.1-1' }}/10
+              </span>
+              <span class="release-date">
+                <i class="far fa-calendar-alt"></i>
+                {{ currentMovie.release_date | date:'MMM d, yyyy' }}
+              </span>
+            </div>
+            <p class="movie-overview">{{ currentMovie.overview | slice:0:150 }}...</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div *ngIf="!currentMovie">
-    <p>No recommendations available at this time.</p>
+
+  <div class="empty-state" *ngIf="!currentMovie">
+    <div class="empty-content">
+      <i class="fas fa-film"></i>
+      <h2>No More Movies</h2>
+      <p>We've shown you all our recommendations for now.</p>
+      <button class="refresh-btn" (click)="ngOnInit()">
+        <i class="fas fa-sync-alt"></i>
+        Refresh Recommendations
+      </button>
+    </div>
   </div>
 
   <div class="controls">
-    <button class="dislike-btn" (click)="onClickLeft()">Dislike</button>
-    <button class="like-btn" (click)="onClickRight()">Like</button>
+    <button class="control-btn dislike" (click)="onClickLeft()">
+      <i class="fas fa-times"></i>
+      <span>Skip</span>
+    </button>
+    <button class="control-btn like" (click)="onClickRight()">
+      <i class="fas fa-heart"></i>
+      <span>Like</span>
+    </button>
   </div>
 </div>

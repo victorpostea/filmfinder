@@ -1,22 +1,81 @@
-div {
-    height: 80px;
-    background-color: rgb(238, 238, 238);
+.main-header {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.nav-links {
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
     display: flex;
-    gap: 20px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    font-size: 1.5rem;
 }
 
-a {
+.logo a {
     text-decoration: none;
-    color: black;
-    transition: color 0.5s ease-in-out;
 }
 
-a:hover {
-    color: grey;
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a237e;
+    background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-menu a i {
+    font-size: 1.1rem;
+}
+
+.nav-menu a:hover {
+    background-color: #f5f5f5;
+    color: #1a237e;
+}
+
+.nav-menu a.active {
+    color: #1a237e;
+    background-color: #e8eaf6;
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        padding: 1rem;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+    }
+
+    .nav-menu {
+        gap: 1rem;
+    }
+
+    .nav-menu a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
 }

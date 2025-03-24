@@ -1,12 +1,49 @@
-<div>
-  <input type="text" [(ngModel)]="userInput" placeholder="Search for a movie" />
-  <button (click)="submitInput()">Submit</button>
-</div>
+<div class="search-container">
+  <div class="search-header">
+    <h1>Search Movies</h1>
+    <p class="subtitle">Find your next favorite film</p>
+  </div>
 
-<div *ngIf="movie_list | async as movies">
-  <ul class="movie-list">
-      <li *ngFor="let movie of movies.results">
-          <app-moviecard [movie]="movie"></app-moviecard>
-      </li>
-  </ul>
+  <div class="search-box">
+    <div class="search-input-wrapper">
+      <i class="fas fa-search search-icon"></i>
+      <input 
+        type="text" 
+        [(ngModel)]="userInput" 
+        placeholder="Search for movies..." 
+        (keyup.enter)="submitInput()"
+        class="search-input"
+      >
+      <button (click)="submitInput()" class="search-button">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="results-container" *ngIf="movie_list | async as movies">
+    <div class="results-header">
+      <h2>Search Results</h2>
+      <p class="results-count">{{ movies.results.length }} movies found</p>
+    </div>
+
+    <div class="movie-grid">
+      <div *ngFor="let movie of movies.results" class="movie-item">
+        <app-moviecard [movie]="movie"></app-moviecard>
+      </div>
+    </div>
+
+    <div class="no-results" *ngIf="movies.results.length === 0">
+      <i class="fas fa-film"></i>
+      <h3>No Movies Found</h3>
+      <p>Try different keywords or check the spelling</p>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!movie_list">
+    <div class="empty-content">
+      <i class="fas fa-search"></i>
+      <h2>Start Your Search</h2>
+      <p>Enter a movie title to find what you're looking for</p>
+    </div>
+  </div>
 </div>

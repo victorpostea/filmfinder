@@ -1,5 +1,24 @@
-<div class="nav-links">
-    <a routerLink="/home" routerLinkActive="active">Home</a>
-    <a routerLink="/search" routerLinkActive="active">Search</a>
-    <a routerLink="/recommend" routerLinkActive="active">Recommend</a>
-</div>
+<header class="main-header">
+  <div class="header-content">
+    <div class="logo">
+      <a routerLink="/home">
+        <span class="logo-text">FilmFinder</span>
+      </a>
+    </div>
+    
+    <nav class="nav-menu">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="fas fa-home"></i>
+        Home
+      </a>
+      <a routerLink="/search" routerLinkActive="active">
+        <i class="fas fa-search"></i>
+        Search
+      </a>
+      <a routerLink="/recommend" routerLinkActive="active">
+        <i class="fas fa-star"></i>
+        Recommend
+      </a>
+    </nav>
+  </div>
+</header>

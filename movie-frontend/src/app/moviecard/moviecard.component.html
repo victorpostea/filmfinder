@@ -1,12 +1,36 @@
 <div class="movie-card">
-  <img [src]="movie.poster_path" [alt]="movie.title + ' Poster'">
+  <div class="poster-container">
+    <img [src]="movie.poster_path" [alt]="movie.title + ' Poster'" class="movie-poster">
+    <div class="overlay">
+      <div class="rating">
+        <i class="fas fa-star"></i>
+        <span>{{ movie.vote_average | number:'1.1-1' }}/10</span>
+      </div>
+    </div>
+  </div>
 
-  <div class="movie-details">
-    <h3>{{ movie.title }}</h3>
-    <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
-    <p><strong>Rating:</strong> ⭐ {{ movie.vote_average }}/10</p>
-    <p class="movie-overview">
-      <strong>Overview:</strong> {{ movie.overview | slice:0:150 }}...
-    </p>
+  <div class="movie-info">
+    <h3 class="movie-title">{{ movie.title }}</h3>
+    <div class="movie-meta">
+      <span class="release-date">
+        <i class="far fa-calendar-alt"></i>
+        {{ movie.release_date | date:'MMM d, yyyy' }}
+      </span>
+      <span class="language">
+        <i class="fas fa-globe"></i>
+        {{ movie.original_language | uppercase }}
+      </span>
+    </div>
+    <p class="movie-overview">{{ movie.overview | slice:0:100 }}...</p>
+    <div class="movie-actions">
+      <button class="action-btn details">
+        <i class="fas fa-info-circle"></i>
+        Details
+      </button>
+      <button class="action-btn add">
+        <i class="fas fa-plus"></i>
+        Add to List
+      </button>
+    </div>
   </div>
 </div>
