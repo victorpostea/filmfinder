@@ -1,0 +1,52 @@
+<div class="search-container">
+    <div class="search-header">
+      <h1>Discover Movies</h1>
+      <p class="subtitle">Find your next favorite film</p>
+    </div>
+  
+    <div class="search-box">
+      <div class="search-input-wrapper">
+        <i class="fas fa-rocket search-icon"></i>
+        <select name="genres">
+            <option value="horror">Horror</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="romance">Romance</option>
+            <option value="documentary">Documentary</option>
+            <option value="drama">Drama</option>
+            <option value="animation">Animation</option>
+        </select>
+        <button (click)="submitInput()" class="search-button">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  
+    <div class="results-container" *ngIf="movie_list | async as movies">
+      <div class="results-header">
+        <h2>Search Results</h2>
+        <p class="results-count">{{ movies.results.length }} movies found</p>
+      </div>
+  
+      <div class="movie-grid">
+        <div *ngFor="let movie of movies.results" class="movie-item">
+          <app-moviecard [movie]="movie"></app-moviecard>
+        </div>
+      </div>
+  
+      <div class="no-results" *ngIf="movies.results.length === 0">
+        <i class="fas fa-film"></i>
+        <h3>No Movies Found</h3>
+        <p>Try different keywords or check the spelling</p>
+      </div>
+    </div>
+  
+    <div class="empty-state" *ngIf="!movie_list">
+      <div class="empty-content">
+        <i class="fas fa-search"></i>
+        <h2>Start Your Search</h2>
+        <p>Enter a movie title to find what you're looking for</p>
+      </div>
+    </div>
+  </div>
+  

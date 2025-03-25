@@ -10,6 +10,7 @@ import { RecommendComponent } from './recommend/recommend.component';
 import { MoviecardComponent } from './moviecard/moviecard.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DiscoverComponent } from './discover/discover.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     SearchComponent,
     RecommendComponent,
-    MoviecardComponent
+    MoviecardComponent,
+    DiscoverComponent
   ],
   imports: [
     BrowserModule,

@@ -15,7 +15,6 @@ export class RecommendComponent implements OnInit {
   currentMovie: Movie | null = null;
   animationClass: string = ''; // for triggering CSS animation
 
-  // Example genres; adjust these based on your app's genres
   availableGenres = [
     { id: 28, name: "Action" },
     { id: 12, name: "Adventure" },
