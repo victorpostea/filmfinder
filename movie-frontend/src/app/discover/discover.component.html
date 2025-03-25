@@ -1,13 +1,14 @@
 <div class="search-container">
     <div class="search-header">
       <h1>Discover Movies</h1>
-      <p class="subtitle">Find your next favorite film</p>
+      <p class="subtitle">Find new films by genre</p>
     </div>
   
     <div class="search-box">
       <div class="search-input-wrapper">
-        <i class="fas fa-rocket search-icon"></i>
-        <select name="genres">
+        <i class="fas fa-film search-icon"></i>
+        <select [(ngModel)]="selectedGenre" class="genre-select">
+            <option value="" disabled selected>Select a genre</option>
             <option value="horror">Horror</option>
             <option value="action">Action</option>
             <option value="comedy">Comedy</option>
@@ -15,8 +16,11 @@
             <option value="documentary">Documentary</option>
             <option value="drama">Drama</option>
             <option value="animation">Animation</option>
+            <option value="sci_fi">Science Fiction</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="thriller">Thriller</option>
         </select>
-        <button (click)="submitInput()" class="search-button">
+        <button (click)="discoverFilms()" class="search-button">
           <i class="fas fa-arrow-right"></i>
         </button>
       </div>
@@ -24,7 +28,7 @@
   
     <div class="results-container" *ngIf="movie_list | async as movies">
       <div class="results-header">
-        <h2>Search Results</h2>
+        <h2>Discover Results</h2>
         <p class="results-count">{{ movies.results.length }} movies found</p>
       </div>
   
@@ -37,15 +41,15 @@
       <div class="no-results" *ngIf="movies.results.length === 0">
         <i class="fas fa-film"></i>
         <h3>No Movies Found</h3>
-        <p>Try different keywords or check the spelling</p>
+        <p>Try selecting a different genre</p>
       </div>
     </div>
   
     <div class="empty-state" *ngIf="!movie_list">
       <div class="empty-content">
-        <i class="fas fa-search"></i>
-        <h2>Start Your Search</h2>
-        <p>Enter a movie title to find what you're looking for</p>
+        <i class="fas fa-compass"></i>
+        <h2>Discover Great Movies</h2>
+        <p>Select a genre to find amazing films to watch</p>
       </div>
     </div>
   </div>

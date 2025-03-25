@@ -10,6 +10,7 @@ export class MovieService {
   private url = 'http://localhost:8080';
   private searchExtension = '/movies?query='
   private recommendExtension = '/discover?genres='
+  private discoverExtension = '/discover/genre?name='
 
   constructor(private http: HttpClient) {}
 
@@ -21,4 +22,7 @@ export class MovieService {
     return this.http.get<MovieResponse>(`${this.url}${this.recommendExtension}${genreIds}`);
   }
 
+  discoverMovies(genre: string): Observable<MovieResponse> {
+    return this.http.get<MovieResponse>(`${this.url}${this.discoverExtension}${genre}`);
+  }
 }
