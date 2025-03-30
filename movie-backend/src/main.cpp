@@ -1,8 +1,25 @@
+/**
+ * @file main.cpp
+ * @brief Main entry point for the Movie Finder backend API
+ * @details Implements a REST API using Crow framework that interfaces with TMDB API
+ *          to provide movie search and discovery functionality.
+ */
+
 #include <cstdlib>
 #include <string>
 #include "crow.h"
 #include <cpr/cpr.h>
 
+/**
+ * @brief Main entry point of the application
+ * @return int Exit code (0 for success)
+ * 
+ * Sets up a Crow web application with the following endpoints:
+ * - GET /: Root endpoint
+ * - GET /movies: Search movies by title
+ * - GET /discover: Discover movies by genres
+ * - GET /discover/genre: Discover movies by specific genre with filtering options
+ */
 int main() {
     crow::SimpleApp app;
 
@@ -13,7 +30,10 @@ int main() {
         return res;
     });
 
-    // OPTIONS route for /movies
+    /**
+     * @brief OPTIONS handler for /movies endpoint
+     * @details Handles CORS preflight requests for the movies endpoint
+     */
     CROW_ROUTE(app, "/movies")
         .methods(crow::HTTPMethod::OPTIONS)
         ([](const crow::request&, crow::response& res) {
@@ -24,7 +44,12 @@ int main() {
             res.end();
         });
 
-    // GET route for /movies (search endpoint)
+    /**
+     * @brief GET handler for /movies endpoint
+     * @details Searches for movies using the TMDB API based on a query parameter
+     * @param req The incoming HTTP request containing the search query
+     * @return crow::response JSON response containing movie search results
+     */
     CROW_ROUTE(app, "/movies")
         .methods(crow::HTTPMethod::GET)
         ([](const crow::request& req) {
@@ -65,7 +90,10 @@ int main() {
             return res;
         });
 
-    // OPTIONS route for /discover
+    /**
+     * @brief OPTIONS handler for /discover endpoint
+     * @details Handles CORS preflight requests for the discover endpoint
+     */
     CROW_ROUTE(app, "/discover")
         .methods(crow::HTTPMethod::OPTIONS)
         ([](const crow::request&, crow::response& res) {
@@ -76,7 +104,12 @@ int main() {
             res.end();
         });
 
-    // GET route for /discover (recommendation endpoint)
+    /**
+     * @brief GET handler for /discover endpoint
+     * @details Retrieves movie recommendations based on genre IDs
+     * @param req The incoming HTTP request containing genre parameters
+     * @return crow::response JSON response containing movie recommendations
+     */
     CROW_ROUTE(app, "/discover")
         .methods(crow::HTTPMethod::GET)
         ([](const crow::request& req) {
@@ -111,7 +144,10 @@ int main() {
             return res;
         });
 
-    // This mapping converts genre names to TMDB genre IDs
+    /**
+     * @brief Mapping of genre names to TMDB genre IDs
+     * @details Used to convert human-readable genre names to TMDB's internal genre IDs
+     */
     std::unordered_map<std::string, std::string> genreNameToId = {
         {"action", "28"},
         {"adventure", "12"},
@@ -133,7 +169,10 @@ int main() {
         {"western", "37"}
     };
 
-    // OPTIONS route for /discover/genre
+    /**
+     * @brief OPTIONS handler for /discover/genre endpoint
+     * @details Handles CORS preflight requests for the genre-specific discover endpoint
+     */
     CROW_ROUTE(app, "/discover/genre")
         .methods(crow::HTTPMethod::OPTIONS)
         ([](const crow::request&, crow::response& res) {
@@ -144,7 +183,12 @@ int main() {
             res.end();
         });
 
-    // GET route for /discover/genre (discover by genre name endpoint)
+    /**
+     * @brief GET handler for /discover/genre endpoint
+     * @details Retrieves movies filtered by genre name with optional parameters
+     * @param req The incoming HTTP request containing genre name and optional filters
+     * @return crow::response JSON response containing filtered movie results
+     */
     CROW_ROUTE(app, "/discover/genre")
     .methods(crow::HTTPMethod::GET)
     ([&genreNameToId](const crow::request& req) {

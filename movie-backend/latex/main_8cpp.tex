@@ -1,0 +1,89 @@
+\doxysection{src/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+
+
+Main entry point for the Movie Finder backend API.  
+
+
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}crow.\+h"{}}\newline
+{\ttfamily \#include $<$cpr/cpr.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main entry point of the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main entry point for the Movie Finder backend API. 
+
+Implements a REST API using Crow framework that interfaces with TMDB API to provide movie search and discovery functionality. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main entry point of the application. 
+
+\begin{DoxyReturn}{Returns}
+int Exit code (0 for success)
+\end{DoxyReturn}
+Sets up a Crow web application with the following endpoints\+:
+\begin{DoxyItemize}
+\item GET /\+: Root endpoint
+\item GET /movies\+: Search movies by title
+\item GET /discover\+: Discover movies by genres
+\item GET /discover/genre\+: Discover movies by specific genre with filtering options 
+\end{DoxyItemize}OPTIONS handler for /movies endpoint
+
+Handles CORS preflight requests for the movies endpoint
+
+GET handler for /movies endpoint
+
+Searches for movies using the TMDB API based on a query parameter 
+\begin{DoxyParams}{Parameters}
+{\em req} & The incoming HTTP request containing the search query \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+crow\+::response JSON response containing movie search results
+\end{DoxyReturn}
+OPTIONS handler for /discover endpoint
+
+Handles CORS preflight requests for the discover endpoint
+
+GET handler for /discover endpoint
+
+Retrieves movie recommendations based on genre IDs 
+\begin{DoxyParams}{Parameters}
+{\em req} & The incoming HTTP request containing genre parameters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+crow\+::response JSON response containing movie recommendations
+\end{DoxyReturn}
+Mapping of genre names to TMDB genre IDs
+
+Used to convert human-\/readable genre names to TMDB\textquotesingle{}s internal genre IDs
+
+OPTIONS handler for /discover/genre endpoint
+
+Handles CORS preflight requests for the genre-\/specific discover endpoint
+
+GET handler for /discover/genre endpoint
+
+Retrieves movies filtered by genre name with optional parameters 
+\begin{DoxyParams}{Parameters}
+{\em req} & The incoming HTTP request containing genre name and optional filters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+crow\+::response JSON response containing filtered movie results
+\end{DoxyReturn}
