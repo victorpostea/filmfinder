@@ -1,56 +1,87 @@
 <div class="search-container">
-    <div class="search-header">
-      <h1>Discover Movies</h1>
-      <p class="subtitle">Find new films by genre</p>
-    </div>
-  
-    <div class="search-box">
-      <div class="search-input-wrapper">
-        <i class="fas fa-film search-icon"></i>
-        <select [(ngModel)]="selectedGenre" class="genre-select">
-            <option value="" disabled selected>Select a genre</option>
-            <option value="horror">Horror</option>
-            <option value="action">Action</option>
-            <option value="comedy">Comedy</option>
-            <option value="romance">Romance</option>
-            <option value="documentary">Documentary</option>
-            <option value="drama">Drama</option>
-            <option value="animation">Animation</option>
-            <option value="sci_fi">Science Fiction</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="thriller">Thriller</option>
-        </select>
-        <button (click)="discoverFilms()" class="search-button">
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-  
-    <div class="results-container" *ngIf="movie_list | async as movies">
-      <div class="results-header">
-        <h2>Discover Results</h2>
-        <p class="results-count">{{ movies.results.length }} movies found</p>
-      </div>
-  
-      <div class="movie-grid">
-        <div *ngFor="let movie of movies.results" class="movie-item">
-          <app-moviecard [movie]="movie"></app-moviecard>
-        </div>
-      </div>
-  
-      <div class="no-results" *ngIf="movies.results.length === 0">
-        <i class="fas fa-film"></i>
-        <h3>No Movies Found</h3>
-        <p>Try selecting a different genre</p>
-      </div>
-    </div>
-  
-    <div class="empty-state" *ngIf="!movie_list">
-      <div class="empty-content">
-        <i class="fas fa-compass"></i>
-        <h2>Discover Great Movies</h2>
-        <p>Select a genre to find amazing films to watch</p>
-      </div>
+  <div class="search-header">
+    <h1>Discover Movies</h1>
+    <p class="subtitle">Find new films by genre</p>
+  </div>
+
+  <div class="search-box">
+    <div class="search-input-wrapper">
+      <i class="fas fa-film search-icon"></i>
+
+      <select [(ngModel)]="selectedGenre" class="genre-select">
+        <option value="" disabled>Select a genre</option>
+        <option value="horror">Horror</option>
+        <option value="action">Action</option>
+        <option value="comedy">Comedy</option>
+        <option value="romance">Romance</option>
+        <option value="documentary">Documentary</option>
+        <option value="drama">Drama</option>
+        <option value="animation">Animation</option>
+        <option value="sci_fi">Science Fiction</option>
+        <option value="fantasy">Fantasy</option>
+        <option value="thriller">Thriller</option>
+      </select>
+
+      <input
+        type="number"
+        [(ngModel)]="selectedYear"
+        placeholder="Year"
+        class="year-input"
+        min="1900"
+        max="2099"
+      />
+
+      <select [(ngModel)]="selectedRating" class="rating-select" required>
+        <option [ngValue]="null" disabled selected>Min Rating</option>
+        <option *ngFor="let r of [1,2,3,4,5,6,7,8,9,10]" [value]="r">{{ r }}+</option>
+      </select>
+      
+      <select [(ngModel)]="selectedSort" class="sort-select">
+        <option value="" disabled selected>Sort by</option>
+        <option value="popularity.desc">Popularity: High to Low</option>
+        <option value="popularity.asc">Popularity: Low to High</option>
+        <option value="vote_average.desc">Rating: High to Low</option>
+        <option value="vote_average.asc">Rating: Low to High</option>
+        <option value="primary_release_date.desc">Year: Newest First</option>
+        <option value="primary_release_date.asc">Year: Oldest First</option>
+      </select>      
+
+      <button (click)="discoverFilms()" class="search-button">
+        <i class="fas fa-arrow-right"></i>
+      </button>
     </div>
   </div>
-  
+
+  <div class="results-container" *ngIf="movies && movies.length > 0">
+    <div class="results-header">
+      <h2>Discover Results</h2>
+      <p class="results-count">{{ movies.length }} movies found</p>
+    </div>
+
+    <div class="movie-grid">
+      <div *ngFor="let movie of movies" class="movie-item">
+        <app-moviecard [movie]="movie"></app-moviecard>
+      </div>
+    </div>
+
+    <div class="pagination" *ngIf="movies.length < totalResults">
+      <button (click)="loadNextPage()" class="next-page-button">
+        Load More
+      </button>
+    </div>
+  </div>
+
+  <div class="no-results" *ngIf="movies && movies.length === 0">
+    <i class="fas fa-film"></i>
+    <h3>No Movies Found</h3>
+    <p>Try selecting a different genre</p>
+  </div>
+
+  <div class="empty-state" *ngIf="!movies">
+    <div class="empty-content">
+      <i class="fas fa-compass"></i>
+      <h2>Discover Great Movies</h2>
+      <p>Select a genre to find amazing films to watch</p>
+    </div>
+  </div>
+</div>

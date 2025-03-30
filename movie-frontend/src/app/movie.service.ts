@@ -22,7 +22,27 @@ export class MovieService {
     return this.http.get<MovieResponse>(`${this.url}${this.recommendExtension}${genreIds}`);
   }
 
-  discoverMovies(genre: string): Observable<MovieResponse> {
-    return this.http.get<MovieResponse>(`${this.url}${this.discoverExtension}${genre}`);
-  }
+  discoverMovies(
+    genre: string,
+    page: number = 1,
+    year?: number | null,
+    rating?: number | null,
+    sortBy?: string
+  ): Observable<MovieResponse> {
+    let query = `${this.url}${this.discoverExtension}${genre}&page=${page}`;
+  
+    if (year) {
+      query += `&year=${year}`;
+    }
+  
+    if (rating) {
+      query += `&rating=${rating}`;
+    }
+  
+    if (sortBy) {
+      query += `&sort_by=${encodeURIComponent(sortBy)}`;
+    }
+
+    return this.http.get<MovieResponse>(query);
+  }   
 }

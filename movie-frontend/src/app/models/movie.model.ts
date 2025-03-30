@@ -16,7 +16,8 @@ export interface Movie {
 }
   
 export interface MovieResponse {
-    page: number;
+    total_results?: number;
+    page?: number;
     results: Movie[];
 }
   

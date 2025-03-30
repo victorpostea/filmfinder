@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { MovieService } from '../movie.service';
-import { Observable } from 'rxjs';
 import { Movie, MovieResponse } from '../models/movie.model';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-discover',
@@ -11,37 +9,59 @@ import { map } from 'rxjs/operators';
 })
 export class DiscoverComponent {
   selectedGenre: string = '';
-  movie_list: Observable<MovieResponse> | null = null;
-  
+  selectedYear: number | null = null;
+  selectedRating: number | null = null;
+  movies: Movie[] = [];
+  selectedSort: string = '';
+  totalResults: number = 0;
+  currentPage: number = 1;
+
   constructor(private movieservice: MovieService) {}
-  
+
   discoverFilms() {
     if (this.selectedGenre) {
       console.log("Discovering movies for genre:", this.selectedGenre);
-      this.movie_list = this.movieservice.discoverMovies(this.selectedGenre).pipe(
-        map(response => this.parseData(response))
-      );
+      this.currentPage = 1;
+      this.movies = [];
+  
+      this.movieservice
+        .discoverMovies(this.selectedGenre, this.currentPage, this.selectedYear, this.selectedRating, this.selectedSort)
+        .subscribe(response => {
+          const parsed = this.parseData(response);
+          this.movies = parsed.results;
+          this.totalResults = parsed.total_results || parsed.results.length;
+        });
     }
   }
   
+  loadNextPage() {
+    this.currentPage++;
+  
+    this.movieservice
+      .discoverMovies(this.selectedGenre, this.currentPage, this.selectedYear, this.selectedRating, this.selectedSort)
+      .subscribe(response => {
+        const parsed = this.parseData(response);
+        this.movies = [...this.movies, ...parsed.results];
+      });
+  }  
+
   parseData(response: MovieResponse): MovieResponse {
     if (!response.results) {
       response.results = [];
       return response;
     }
-    
+
     response.results = response.results.map(movie => ({
       ...movie,
       title: movie.title || "Unknown Title",
       release_date: movie.release_date || "N/A",
       vote_average: typeof movie.vote_average === "number" ? movie.vote_average : 0,
       overview: movie.overview || "No overview available.",
-      // Build full poster URL or use fallback if not available
-      poster_path: movie.poster_path 
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` 
+      poster_path: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         : "/assets/img_gone.png"
     }));
-  
+
     return response;
   }
 }
